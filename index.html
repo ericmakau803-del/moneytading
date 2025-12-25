@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For My Pash</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            background-color: #7b0000;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 400px;
+            background: linear-gradient(145deg, #a00000, #7b0000);
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            position: relative;
+        }
+
+        h1 { font-size: 24px; margin-bottom: 10px; }
+        p { font-size: 16px; margin-bottom: 20px; }
+
+        .btn-group { display: flex; flex-direction: column; gap: 10px; }
+
+        button {
+            padding: 12px;
+            border: none;
+            border-radius: 25px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .btn-yes { background-color: white; color: #7b0000; }
+        .btn-no { background-color: transparent; border: 1px solid white; color: white; }
+
+        .hidden { display: none; }
+
+        /* Menu Icons */
+        .menu-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .icon-card {
+            background: rgba(255,255,255,0.1);
+            padding: 15px;
+            border-radius: 15px;
+            cursor: pointer;
+        }
+
+        .icon-card:hover { background: rgba(255,255,255,0.2); }
+
+        .back-btn { margin-top: 20px; background: none; color: white; text-decoration: underline; font-size: 12px; }
+    </style>
+</head>
+<body>
+
+    <audio id="bgMusic" loop>
+        <source src="https://www.mboxdrive.com/Fancy%20Fingers%20Ft%20Njerae%20-%20Its%20You.mp3" type="audio/mpeg">
+    </audio>
+
+    <div id="step1" class="container">
+        <h1>Hi Pash! ❤️</h1>
+        <p>I just wanted to show you some love today... Do you want to see your surprise?</p>
+        <div class="btn-group">
+            <button class="btn-yes" onclick="startExperience()">YES PLEASE</button>
+            <button class="btn-no" onclick="rejectLove()">NO THANKS</button>
+        </div>
+    </div>
+
+    <div id="stepReject" class="container hidden">
+        <h1 style="font-size: 50px;">💔</h1>
+        <p>I promise you will love it, please try again!</p>
+        <button class="btn-yes" onclick="goBackToStart()">TRY AGAIN</button>
+    </div>
+
+    <div id="stepMenu" class="container hidden">
+        <p>THESE ARE FOR YOU</p>
+        <div class="menu-grid">
+            <div class="icon-card" onclick="showSection('jar')">🫙<br><small>Jar</small></div>
+            <div class="icon-card" onclick="showSection('music')">🎧<br><small>Vibe</small></div>
+            <div class="icon-card" onclick="showSection('note')">📩<br><small>Note</small></div>
+        </div>
+    </div>
+
+    <div id="sectionJar" class="container hidden">
+        <h3>JAR OF LOVE</h3>
+        <p>• You feel like home</p>
+        <p>• Unanishughulikia sana</p>
+        <p>• You are my fave person</p>
+        <p>• Your smile is everything</p>
+        <button class="back-btn" onclick="showMenu()">Back</button>
+    </div>
+
+    <div id="sectionMusic" class="container hidden">
+        <h3>THIS SONG REMINDS ME OF YOU</h3>
+        <p>Njerae - It's You 🎶</p>
+        <div style="font-size: 40px;">🎧</div>
+        <p><small>Currently playing...</small></p>
+        <button class="back-btn" onclick="showMenu()">Back</button>
+    </div>
+
+    <div id="sectionNote" class="container hidden">
+        <h3>A Message for Pash</h3>
+        <p>You are truly the best thing that ever happened to me. Kila day unakuja na furaha mpya kwa life yangu na nashukuru sana kuwa na wewe.</p>
+        <h2 style="color: #ffda00;">Nakupenda wewe umbwa! 😂</h2>
+        <p>I just wanted to show you how much you mean to me.</p>
+        <button class="back-btn" onclick="showMenu()">Back</button>
+    </div>
+
+    <script>
+        const music = document.getElementById('bgMusic');
+
+        function startExperience() {
+            music.play();
+            document.getElementById('step1').classList.add('hidden');
+            document.getElementById('stepMenu').classList.remove('hidden');
+        }
+
+        function rejectLove() {
+            document.getElementById('step1').classList.add('hidden');
+            document.getElementById('stepReject').classList.remove('hidden');
+        }
+
+        function goBackToStart() {
+            document.getElementById('stepReject').classList.add('hidden');
+            document.getElementById('step1').classList.remove('hidden');
+        }
+
+        function showSection(type) {
+            document.getElementById('stepMenu').classList.add('hidden');
+            if(type === 'jar') document.getElementById('sectionJar').classList.remove('hidden');
+            if(type === 'music') document.getElementById('sectionMusic').classList.remove('hidden');
+            if(type === 'note') document.getElementById('sectionNote').classList.remove('hidden');
+        }
+
+        function showMenu() {
+            document.querySelectorAll('.container').forEach(c => c.classList.add('hidden'));
+            document.getElementById('stepMenu').classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>
